@@ -2,7 +2,7 @@ version: 2.1
 
 docker-def: &docker-def
     docker:
-      - image: circleci/aws-cli
+      - image: amazon/aws-cli
 
 jobs:
   create_infrastructure:
