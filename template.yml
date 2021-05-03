@@ -1,4 +1,51 @@
+Parameters:
+
+    EnvironmentName:
+        Description: Udagram Environment identifier
+        Type: String
+
+    VpcCIDR: 
+        Description: VPC adress range
+        Type: String
+        Default: 10.0.0.0/16
+
+    PublicSubnet1CIDR:
+        Description: PUNET1 adress range
+        Type: String
+        Default: 10.0.0.0/24
+
+    PublicSubnet2CIDR:
+        Description: PUNET2 adress range
+        Type: String
+        Default: 10.0.1.0/24
+
+    PrivateSubnet1CIDR:
+        Description: PINET1 adress range
+        Type: String
+        Default: 10.0.2.0/24
+
+    PrivateSubnet2CIDR:
+        Description: PINET2 adress range
+        Type: String
+        Default: 10.0.3.0/24
+
+
 Resources:
+  VPC: 
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCIDR
+      EnableDnsHostnames: true
+      Tags: 
+        - Key: Name 
+          Value: Udacity
+  PUNET1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [ 0, !GetAZs '' ]
+      CidrBlock: !Ref PublicSubnet1CIDR
+      MapPublicIpOnLaunch: true
   Ec2Instane:
     Type: 'AWS::EC2::Instance'
     Properties:
