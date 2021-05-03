@@ -9,7 +9,10 @@ jobs:
     <<: *docker-def
     steps:
       checkout
-      - run: aws cloudformation create-stack --stack-name ansible-ec2  --template-body file://template.yml --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region=us-west-2
+      - run:
+        name: build infra 
+        command: |
+          aws cloudformation deploy --stack-name ansible-ec2  --template-file file://template.yml --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region=us-west-2
 
 
 workflows:
