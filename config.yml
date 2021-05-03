@@ -1,0 +1,17 @@
+version: 2.1
+
+docker-def: &docker-def
+    docker:
+      - image: circleci/aws-cli@2.0
+
+jobs:
+  create_infrastructure:
+    <<: *docker-def
+    steps:
+      - run: aws cloudformation create-stack --ansible-ec2 %1 --template-body file://template.yml --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region=us-west-2
+
+
+workflows:
+  wf-create-infra:
+    jobs: 
+      - create_infrastructure
