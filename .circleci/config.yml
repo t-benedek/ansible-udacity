@@ -8,7 +8,7 @@ jobs:
   create_infrastructure:
     <<: *docker-def
     steps:
-      checkout
+      - checkout
       - run:
         name: build infra 
         command: |
