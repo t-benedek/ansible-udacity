@@ -13,10 +13,10 @@ jobs:
           name: install dependencies
           command: |
             apk add --update ansible 
-      - run:
-          name: Disable key checking
-          command: |
-            export ANSIBLE_HOST_KEY_CHECKING=False
+      # - run:
+      #     name: Disable key checking
+      #     command: |
+      #       export ANSIBLE_HOST_KEY_CHECKING=False
       - run:
           name: Configure Server
           command: |
@@ -29,7 +29,7 @@ jobs:
       - run:
           name: smoke test.
           command: |
-            URL="34.222.14.189"
+            URL="34.222.14.189" 
             if curl -s --head ${URL}
             then
               return 0
@@ -43,4 +43,4 @@ workflows:
       - create_infrastructure
       - smoke_test:
         requires:
-          configure_infrastructure
+          - configure_infrastructure
