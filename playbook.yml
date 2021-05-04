@@ -1,5 +1,5 @@
 ---
-- name: Exercise 19: setting up EC-2 server with ansible and circle-ci
+- name: Exercise 19 setting up EC-2 server with ansible and circle-ci
   hosts: all
   user: ubuntu
   roles:
