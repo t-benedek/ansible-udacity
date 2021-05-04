@@ -17,28 +17,22 @@
 - name: "install dependencies."
   become: yes
   apt:
-    name: ["nodejs", "npm"]
+    name: ["apache2"]
     state: latest
     update_cache: yes
 
-- name: "install pm2"
-  become: yes
-  npm:
-    name: pm2
-    global: yes
-    production: yes
-    state: present
-
 - name: Creates directory
+  become: yes
   file:
-    path: ~/web
+    path: /var/www/html/
     state: directory
 
 - name: Copy index test page
+  become: yes  
   template:
-    src: "files/index.js"
-    dest: "~/web/index.js"
+    src: "files/index.html"
+    dest: "/var/www/html/index.html"
 
-- name: Executing node
-  shell: |
-    pm2 start ~/web/index.js -f
+# - name: Executing node
+#   shell: |
+#     pm2 start ~/web/index.js -f
