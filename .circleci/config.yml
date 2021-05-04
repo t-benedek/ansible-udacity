@@ -14,6 +14,10 @@ jobs:
           command: |
             apk add --update ansible 
       - run:
+          name: Disable key checking
+          command: |
+            export ANSIBLE_HOST_KEY_CHECKING=False
+      - run:
           name: Configure Server
           command: |
             ansible-playbook -i inventory.txt playbook.yml
